@@ -5,6 +5,16 @@ import { describe, expect, it } from "vitest";
 const iconSizes = [16, 32, 48, 128] as const;
 
 describe("store release assets", () => {
+  it("keeps the supplied high-resolution image as the canonical icon source", async () => {
+    const metadata = await sharp("src/assets/app-icon.png").metadata();
+
+    expect({ width: metadata.width, height: metadata.height, format: metadata.format }).toEqual({
+      width: 1254,
+      height: 1254,
+      format: "png"
+    });
+  });
+
   it("declares and provides correctly sized PNG icons", async () => {
     const manifest = JSON.parse(await readFile("public/manifest.json", "utf8")) as {
       icons: Record<string, string>;
