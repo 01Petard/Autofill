@@ -7,7 +7,7 @@ interface ContentRuntime {
   destroy(): void;
 }
 
-const runtimeKey = "__AXIOM_AUTOFILL_RUNTIME__";
+const runtimeKey = "__AUTOFILL_RUNTIME__";
 const runtimeScope = globalThis as unknown as Record<string, ContentRuntime | undefined>;
 
 async function start(): Promise<void> {

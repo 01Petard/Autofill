@@ -32,7 +32,7 @@ npm run build
 npm run package
 ```
 
-命令会执行 lint、类型检查、测试、生产构建和发布校验，并生成 `release/axiom-autofill-<version>.zip`。
+命令会执行 lint、类型检查、测试、生产构建和发布校验，并生成 `release/autofill-<version>.zip`。
 
 ## 数据边界
 

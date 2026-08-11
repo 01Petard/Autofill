@@ -17,6 +17,6 @@ async function collect(directory, prefix = "") {
 
 await collect(source);
 await mkdir(resolve("release"), { recursive: true });
-const target = resolve("release", `axiom-autofill-${manifest.version}.zip`);
+const target = resolve("release", `autofill-${manifest.version}.zip`);
 await writeFile(target, zipSync(entries, { level: 9 }));
 console.log(target);

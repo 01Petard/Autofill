@@ -43,5 +43,5 @@ build/
 .vscode/
 .codex
 .opencode
-.idea
 .claude
+docs/superpowers
