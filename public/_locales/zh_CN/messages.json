@@ -1,0 +1,5 @@
+{
+  "appName": { "message": "智填" },
+  "appDescription": { "message": "使用你自己的 AI 模型生成安全测试数据并填写网页表单" },
+  "actionTitle": { "message": "智填表单助手" }
+}

@@ -1,0 +1,5 @@
+{
+  "appName": { "message": "Autofill" },
+  "appDescription": { "message": "Use your own AI model to generate safe test data and fill web forms." },
+  "actionTitle": { "message": "Autofill form assistant" }
+}
