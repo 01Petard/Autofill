@@ -1,4 +1,5 @@
 import "./popup.css";
+import appIconUrl from "../assets/app-icon-ui.png?inline";
 import { chromeLocalStorage } from "../shared/chrome-storage";
 import { localeFromLanguage, uiText } from "../shared/i18n";
 import { pageOrigin } from "../shared/origin";
@@ -17,7 +18,7 @@ if (app) {
   app.innerHTML = `
     <section class="popup-shell">
       <header class="popup-header">
-        <div class="brand-mark" aria-hidden="true">${locale === "zh" ? "填" : "A"}</div>
+        <img class="brand-icon" src="${appIconUrl}" alt="" aria-hidden="true" />
         <div><h1>${text.popupTitle}</h1><p id="model-name">${text.noModel}</p></div>
       </header>
       <div class="toggle-row">

@@ -1,4 +1,5 @@
 import { applyGeneratedValues } from "../form/executor";
+import appIconUrl from "../assets/app-icon-ui.png?inline";
 import { scanFormFields } from "../form/scanner";
 import type { FormField, GeneratedValues } from "../form/types";
 import type { FillPageResponse } from "../shared/messages";
@@ -54,16 +55,20 @@ export function mountLauncher(options: LauncherOptions): LauncherHandle {
       :host { all: initial; }
       .wrap { position: fixed; z-index: 2147483647; display: flex; align-items: center; gap: 10px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
       .wrap.left { flex-direction: row-reverse; }
-      button { position: relative; width: 56px; height: 56px; border: 1px solid rgba(35,92,173,.2); border-radius: 50%; padding: 0; color: #1457b8; background: rgba(250,252,255,.96); box-shadow: 0 12px 28px rgba(24,39,63,.2), inset 0 0 0 5px rgba(39,108,205,.06); cursor: pointer; font: 800 18px/1 inherit; }
-      button:hover { color: #0d4b9e; background: #fff; }
+      button { position: relative; width: 56px; height: 56px; border: 0; border-radius: 15px; padding: 0; background: transparent; box-shadow: 0 12px 28px rgba(24,39,63,.2); cursor: pointer; font: 800 18px/1 inherit; }
+      button:hover { transform: translateY(-1px); }
       button:focus-visible { outline: 3px solid rgba(55,141,255,.42); outline-offset: 3px; }
       button:disabled { opacity: .72; cursor: wait; }
+      .launcher-icon { display: block; width: 56px; height: 56px; border-radius: 15px; }
+      .busy-mark { display: none; position: absolute; inset: 0; place-items: center; border-radius: 15px; color: #fff; background: #1633ac; }
+      button.busy .launcher-icon { visibility: hidden; }
+      button.busy .busy-mark { display: grid; }
       .status { max-width: min(280px, calc(100vw - 92px)); padding: 9px 12px; border: 1px solid rgba(24,36,56,.1); border-radius: 8px; color: #243047; background: #fff; box-shadow: 0 8px 24px rgba(15,23,42,.15); font-size: 12px; line-height: 1.4; }
       .hidden { display: none; }
     </style>
     <div class="wrap">
       <span class="status hidden" role="status" aria-live="polite"></span>
-      <button type="button" aria-label="${text.button}" title="${text.button}">填</button>
+      <button type="button" aria-label="${text.button}" title="${text.button}"><img class="launcher-icon" src="${appIconUrl}" alt="" /><span class="busy-mark" aria-hidden="true">…</span></button>
     </div>
   `;
   options.document.documentElement.appendChild(host);
@@ -88,7 +93,7 @@ export function mountLauncher(options: LauncherOptions): LauncherHandle {
   const showStatus = (message: string, busy = false): void => {
     if (statusTimer !== undefined) window.clearTimeout(statusTimer);
     button.disabled = busy;
-    button.textContent = busy ? "…" : "填";
+    button.classList.toggle("busy", busy);
     status.textContent = message;
     status.classList.remove("hidden");
     if (!busy) {

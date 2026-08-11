@@ -4,10 +4,17 @@ import sharp from "sharp";
 
 const outputDirectory = resolve("public/icons");
 const sourceIcon = resolve("src/assets/app-icon.png");
+const uiIcon = resolve("src/assets/app-icon-ui.png");
 const sizes = [16, 32, 48, 128];
 
 await mkdir(outputDirectory, { recursive: true });
-await Promise.all(sizes.map((size) => sharp(sourceIcon)
-  .resize(size, size, { fit: "cover" })
-  .png({ compressionLevel: 9 })
-  .toFile(resolve(outputDirectory, `icon-${size}.png`))));
+await Promise.all([
+  ...sizes.map((size) => sharp(sourceIcon)
+    .resize(size, size, { fit: "cover" })
+    .png({ compressionLevel: 9 })
+    .toFile(resolve(outputDirectory, `icon-${size}.png`))),
+  sharp(sourceIcon)
+    .resize(128, 128, { fit: "cover" })
+    .png({ compressionLevel: 9 })
+    .toFile(uiIcon)
+]);

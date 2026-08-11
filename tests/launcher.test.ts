@@ -18,6 +18,9 @@ describe("page launcher", () => {
     const launcher = mountLauncher({ document, locale: "en", fill, scan, apply, shadowMode: "open" });
     const duplicate = mountLauncher({ document, locale: "en", fill, scan, apply, shadowMode: "open" });
     const host = document.querySelector("#smart-form-fill-root") as HTMLElement;
+    const icon = host.shadowRoot?.querySelector(".launcher-icon") as HTMLImageElement;
+
+    expect(icon.src).toMatch(/^data:image\/png;base64,/);
     (host.shadowRoot?.querySelector("button") as HTMLButtonElement).click();
     await vi.waitFor(() => expect(fill).toHaveBeenCalledOnce());
 

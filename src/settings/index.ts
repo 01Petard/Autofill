@@ -1,4 +1,5 @@
 import "./settings.css";
+import appIconUrl from "../assets/app-icon-ui.png?inline";
 import { createDefaultConfig, resolveActiveConfig } from "../shared/model-config";
 import { chromeLocalStorage } from "../shared/chrome-storage";
 import { localeFromLanguage, uiText } from "../shared/i18n";
@@ -21,7 +22,7 @@ if (app) {
   app.innerHTML = `
     <div class="page-shell">
       <header class="page-header">
-        <div><p class="eyebrow">${text.settingsEyebrow}</p><h1>${text.settingsTitle}</h1><p class="subtitle">${text.settingsSubtitle}</p></div>
+        <div class="page-brand"><img class="page-brand-icon" src="${appIconUrl}" alt="" aria-hidden="true" /><div><p class="eyebrow">${text.settingsEyebrow}</p><h1>${text.settingsTitle}</h1><p class="subtitle">${text.settingsSubtitle}</p></div></div>
         <span class="status-dot"><i></i>${text.localConfig}</span>
       </header>
       <section class="content-grid">

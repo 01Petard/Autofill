@@ -15,6 +15,16 @@ describe("store release assets", () => {
     });
   });
 
+  it("provides a compact generated icon for extension UI bundles", async () => {
+    const metadata = await sharp("src/assets/app-icon-ui.png").metadata();
+
+    expect({ width: metadata.width, height: metadata.height, format: metadata.format }).toEqual({
+      width: 128,
+      height: 128,
+      format: "png"
+    });
+  });
+
   it("declares and provides correctly sized PNG icons", async () => {
     const manifest = JSON.parse(await readFile("public/manifest.json", "utf8")) as {
       icons: Record<string, string>;
